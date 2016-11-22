@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers',  ['ionic', 'starter.services'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
@@ -41,24 +41,19 @@ angular.module('starter.controllers', [])
   };
 })
 
-    .controller('camara', function($scope, Camera) {
-
-        $scope.getPicture = function (options) {
-
-            var options = {
-                quality : 75,
+    .controller('camara', function($scope, Camara) {
+        $scope.tomaFoto = function() {
+            Camara.tomaFoto().then(function(imageURI) {
+                $scope.ultimaFoto = imageURI;
+            }, function(err) {
+                console.err(err);
+            }, {
+                quality: 75,
                 targetWidth: 200,
                 targetHeight: 200,
-                sourceType: 0
-            };
-
-            Camera.getPicture(options).then(function(imageData) {
-                $scope.picture = imageData;;
-            }, function(err) {
-                console.log(err);
+                saveToPhotoAlbum: false
             });
         };
-
     })
 
 
@@ -73,5 +68,4 @@ angular.module('starter.controllers', [])
   ];
 })
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
-});
+
