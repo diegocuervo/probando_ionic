@@ -22,6 +22,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   });
 })
 
+
+
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
@@ -41,6 +43,17 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+
+
+      .state('app.camara', {
+          url: '/camara',
+          views: {
+              'menuContent': {
+                  templateUrl: 'templates/camara.html',
+                  controller: 'camara'
+              }
+          }
+      })
 
   .state('app.single', {
     url: '/playlists/:playlistId',
